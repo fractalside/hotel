@@ -1,0 +1,14 @@
+<fnd>
+	<index tag="idcoder.elt_uin">
+		<df>length.allow:			15</df>
+		<df>length.15.offset:		26</df>
+		<df>field.type.bits:		26</df>
+		<df>field.type.case.0:		1</df>
+		
+		<index tag="field.country">
+			<df>bits:			27..32</df>
+			<df>type:			int</df>
+			<df>title.123:		Mars</df>
+		</index>
+	</index>	
+</fnd>

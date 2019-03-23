@@ -3,5 +3,21 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  	<display-name>Hotel</display-name>
+
+  <servlet>
+    <servlet-name>cargoServlet</servlet-name>
+    <servlet-class>info.tecnosfera.fractalside.hotel.spider.CargoSpider</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>controlServlet</servlet-name>
+    <servlet-class>info.tecnosfera.fractalside.hotel.front.Shell</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>controlServlet</servlet-name>
+    <url-pattern>/main/*</url-pattern>
+  </servlet-mapping>
+
 </web-app>

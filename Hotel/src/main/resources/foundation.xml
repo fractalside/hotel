@@ -1,0 +1,5 @@
+<body>
+	<include rsc="hotel.fnd.xml" />
+	<df>name		:Hotel API front</df>
+	<df>version		:0.0.2</df>
+</body>

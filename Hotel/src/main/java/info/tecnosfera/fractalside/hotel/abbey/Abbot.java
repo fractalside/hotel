@@ -1,0 +1,80 @@
+/*
+-------------------------------------------------------------------------
+fractalside's Hotel - Alpha 0.0.2 
+(Don't use yet. There's work left)
+-------------------------------------------------------------------------
+http://fractalside.tecnosfera.info , https://github.com/fractalside
+"The miracle is this: the more we share the more we have" 
+                                           Leonard Nimoy 1931 - 2015
+-------------------------------------------------------------------------
+Copyright 2018 fractalside (Gonzalo Virgos Revilla)
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+       http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+package info.tecnosfera.fractalside.hotel.abbey;
+
+/**
+ * 
+ * @author fractal
+ *
+ */
+public class Abbot extends Monk {
+	
+	private Writer answerer = null;
+	
+	/**
+	 * 
+	 * @param command
+	 */
+	public Abbot(String command) {
+		super(new Book());
+		answerer = new Writer("");
+		answerer.put("user?", command,Abbey.URN, "hotel");
+		putMeta("command", command);
+		putMeta("tokens", Abbey.array(new SintaxReader().splitWords(command)));
+	}
+
+	
+	public String getAnswer(String...lastWords) {
+		answerer.put(lastWords);
+		answerer.put(Abbey.URN);
+		return answerer.dump();
+//		"user? ", commandTxt, Abbey.URN, "hotel> ", answer, Abbey.URN)
+	}
+	
+	public void answer(String... strings) {
+		answerer.put(strings);
+	}
+	
+	
+	/**
+	 * 
+	 * @param sintax
+	 * @return
+	 */
+	public boolean understand(String... sintax) {
+		String word,token;
+		for(int i = 0; i < sintax.length; i++) {
+			word = sintax[i];
+			token = meta("tokens", i);
+			if("".equals(token)) {
+				return false;
+			}
+			if(word.startsWith("$")) {
+				put(word.substring(word.indexOf(":")), token);
+			} else if (!word.equals(token)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	
+}
